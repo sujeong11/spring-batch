@@ -1,7 +1,6 @@
 package com.study.springbatch.job.ValidatedParam;
 
 import com.study.springbatch.job.ValidatedParam.Validator.FileParamValidator;
-import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -28,31 +27,31 @@ public class ValidatedParamJobConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job ValidatedParamJob(Step ValidatedParamStep) {
-        return jobBuilderFactory.get("ValidatedParamJob")
+    public Job validatedParamJob(Step validatedParamStep) {
+        return jobBuilderFactory.get("validatedParamJob")
                 .incrementer(new RunIdIncrementer())
                 .validator(new FileParamValidator())
-                .start(ValidatedParamStep)
+                .start(validatedParamStep)
                 .build();
     }
 
     @JobScope
     @Bean
-    public Step ValidatedParamStep(Tasklet ValidatedParamTasklet) {
-        return stepBuilderFactory.get("helloWorldStep")
-                .tasklet(ValidatedParamTasklet)
+    public Step validatedParamStep(Tasklet validatedParamTasklet) {
+        return stepBuilderFactory.get("validatedParamStep")
+                .tasklet(validatedParamTasklet)
                 .build();
     }
 
     @StepScope
     @Bean
-    public Tasklet ValidatedParamTasklet(@Value("#{jobParameters['fileName']}") String fileName) {
+    public Tasklet validatedParamTasklet(@Value("#{jobParameters['fileName']}") String fileName) {
         return new Tasklet() {
             @Override
             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
                 System.out.println(fileName);
                 System.out.println("Validated Param Tasklet");
-                return RepeatStatus.FINISHED; // 작업이 끝난 이후에 무슨 작업을 할 지 반환
+                return RepeatStatus.FINISHED;
             }
         };
     }
