@@ -1,4 +1,4 @@
-package com.study.springbatch.job.FileDataReadWrite.dto;
+package com.study.springbatch.job.fileDataReadWrite.dto;
 
 import lombok.Getter;
 import lombok.Setter;

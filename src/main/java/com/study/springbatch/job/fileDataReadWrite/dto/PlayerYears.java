@@ -1,4 +1,4 @@
-package com.study.springbatch.job.FileDataReadWrite.dto;
+package com.study.springbatch.job.fileDataReadWrite.dto;
 
 import java.time.Year;
 import lombok.Getter;

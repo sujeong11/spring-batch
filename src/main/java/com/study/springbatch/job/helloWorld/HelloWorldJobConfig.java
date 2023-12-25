@@ -1,4 +1,4 @@
-package com.study.springbatch.job.JobListener;
+package com.study.springbatch.job.helloWorld;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JobListenerConfig {
+public class HelloWorldJobConfig {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -25,30 +25,29 @@ public class JobListenerConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job jobListenerJob(Step jobListenerStep) {
-        return jobBuilderFactory.get("jobListenerJob")
+    public Job helloWorldJob() {
+        return jobBuilderFactory.get("helloWorldJob")
                 .incrementer(new RunIdIncrementer())
-                .listener(new JobLoggerListener())
-                .start(jobListenerStep)
+                .start(helloWorldStep())
                 .build();
     }
 
     @JobScope
     @Bean
-    public Step jobListenerStep(Tasklet jobListenerTasklet) {
-        return stepBuilderFactory.get("jobListenerStep")
-                .tasklet(jobListenerTasklet)
+    public Step helloWorldStep() {
+        return stepBuilderFactory.get("helloWorldStep")
+                .tasklet(helloWorldTasklet())
                 .build();
     }
 
     @StepScope
     @Bean
-    public Tasklet jobListenerTasklet() {
+    public Tasklet helloWorldTasklet() {
         return new Tasklet() {
             @Override
             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                System.out.println("Job Listener Tasklet");
-                return RepeatStatus.FINISHED;
+                System.out.println("Hello World Spring Batch");
+                return RepeatStatus.FINISHED; // 작업이 끝난 이후에 무슨 작업을 할 지 반환
             }
         };
     }

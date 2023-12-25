@@ -1,4 +1,4 @@
-package com.study.springbatch.job.MutipleStep;
+package com.study.springbatch.job.mutipleStep;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;

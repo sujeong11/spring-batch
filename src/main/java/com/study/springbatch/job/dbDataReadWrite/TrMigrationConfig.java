@@ -1,4 +1,4 @@
-package com.study.springbatch.job.DBDataReadWrite;
+package com.study.springbatch.job.dbDataReadWrite;
 
 import com.study.springbatch.core.domain.accounts.Accounts;
 import com.study.springbatch.core.domain.accounts.AccountsRepository;
@@ -21,7 +21,6 @@ import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort.Direction;

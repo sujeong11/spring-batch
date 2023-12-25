@@ -1,6 +1,6 @@
-package com.study.springbatch.job.FileDataReadWrite;
+package com.study.springbatch.job.fileDataReadWrite;
 
-import com.study.springbatch.job.FileDataReadWrite.dto.Player;
+import com.study.springbatch.job.fileDataReadWrite.dto.Player;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;

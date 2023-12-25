@@ -1,7 +1,7 @@
-package com.study.springbatch.job.FileDataReadWrite;
+package com.study.springbatch.job.fileDataReadWrite;
 
-import com.study.springbatch.job.FileDataReadWrite.dto.Player;
-import com.study.springbatch.job.FileDataReadWrite.dto.PlayerYears;
+import com.study.springbatch.job.fileDataReadWrite.dto.Player;
+import com.study.springbatch.job.fileDataReadWrite.dto.PlayerYears;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

@@ -1,5 +1,6 @@
-package com.study.springbatch.job.HelloWorld;
+package com.study.springbatch.job.validatedParam;
 
+import com.study.springbatch.job.validatedParam.validator.FileParamValidator;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -12,11 +13,12 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class HelloWorldJobConfig {
+public class ValidatedParamJobConfig {
 
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -25,29 +27,31 @@ public class HelloWorldJobConfig {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job helloWorldJob() {
-        return jobBuilderFactory.get("helloWorldJob")
+    public Job validatedParamJob(Step validatedParamStep) {
+        return jobBuilderFactory.get("validatedParamJob")
                 .incrementer(new RunIdIncrementer())
-                .start(helloWorldStep())
+                .validator(new FileParamValidator())
+                .start(validatedParamStep)
                 .build();
     }
 
     @JobScope
     @Bean
-    public Step helloWorldStep() {
-        return stepBuilderFactory.get("helloWorldStep")
-                .tasklet(helloWorldTasklet())
+    public Step validatedParamStep(Tasklet validatedParamTasklet) {
+        return stepBuilderFactory.get("validatedParamStep")
+                .tasklet(validatedParamTasklet)
                 .build();
     }
 
     @StepScope
     @Bean
-    public Tasklet helloWorldTasklet() {
+    public Tasklet validatedParamTasklet(@Value("#{jobParameters['fileName']}") String fileName) {
         return new Tasklet() {
             @Override
             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                System.out.println("Hello World Spring Batch");
-                return RepeatStatus.FINISHED; // 작업이 끝난 이후에 무슨 작업을 할 지 반환
+                System.out.println(fileName);
+                System.out.println("Validated Param Tasklet");
+                return RepeatStatus.FINISHED;
             }
         };
     }
