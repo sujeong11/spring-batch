@@ -25,4 +25,10 @@ public class Orders {
     private int price;
 
     private LocalDateTime orderDate;
+
+    public Orders(String orderItem, int price, LocalDateTime orderDate) {
+        this.orderItem = orderItem;
+        this.price = price;
+        this.orderDate = orderDate;
+    }
 }
